@@ -1,0 +1,27 @@
+<h1><%= @project.title %></h1>
+
+<div>Title: <%= @project.title %></div>
+<div>Status: <%= @project.status %></div>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
+
+<% if @project.versions.any? %>
+  <hr>
+  <h2>Status History:</h2>
+  <% @project.versions.each do |change| %>
+    <div>Chatus changed to: <b><%= (change.next&.reify || @project).status %></b></div>
+    <div>When: <%= change.created_at %></div>
+    <div>User ID: <%= change.whodunnit %></div>
+    <hr>
+  <% end %>
+<% end %>
+
+<h2>New Comment:</h2>
+<%= render 'comments/form', comment: @comment, project: @project %>
+
+<% if @comments.any? %>
+  <hr>
+  <h2>Comments (<%= @comments.count %>):</h2>
+  <%= render 'comments/comments', comments: @comments %>
+<% end %>

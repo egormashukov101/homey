@@ -1,0 +1,8 @@
+<div>
+  <% comments.each.with_index do |comment, i| %>
+    <h3>Comment <%= i %></h3>
+    <div><%= comment.text %></div>
+    <div>By: <b><%= comment.user.email %></b></div>
+    <hr>
+  <% end %>
+</div>
